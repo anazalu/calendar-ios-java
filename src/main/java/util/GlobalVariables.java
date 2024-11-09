@@ -6,4 +6,5 @@ public class GlobalVariables {
 
     public static final String localAppiumServerUrl = "http://localhost:4723";
     public static final Duration globalTimeout = Duration.ofSeconds(15);
+    public static String response;
 }

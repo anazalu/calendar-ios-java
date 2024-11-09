@@ -5,6 +5,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -21,18 +22,27 @@ public class CalendarHomePage extends Helpers {
     @iOSXCUITFindBy(accessibility = "Calendar")
     private RemoteWebElement calendarHomePageContainer;
 
+    @iOSXCUITFindBy(accessibility = "addevent-button")
+    private RemoteWebElement addNewEventButton;
+
     public CalendarHomePage(IOSDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
+    @Step("Calendar home page is loaded")
     public boolean calendarHomePageLoaded() {
         return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(calendarHomePageContainer)).isDisplayed();
     }
 
-    public void chooseTimeslot(String timeSlot) {
-        WebElement element = driver.findElement(AppiumBy.accessibilityId(timeSlot));
-        scrollTo(driver, element, Directions.DOWN, 5);
-        longPress(driver, element);
+    public void tapToAddNewEvent() {
+        addNewEventButton.click();
     }
+
+//    @Step("Timeslot {0} is chosen")
+//    public void chooseTimeslot(String timeSlot) {
+//        WebElement element = driver.findElement(AppiumBy.accessibilityId(timeSlot));
+//        scrollTo(driver, element, Directions.DOWN, 5);
+//        longPress(driver, element);
+//    }
 }

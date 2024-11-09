@@ -19,6 +19,7 @@ public class DriverSetup extends ConfigReader {
     protected static IOSDriver driver;
 
     protected Helpers helpers;
+    protected RestAssuredUtility restAssuredUtility;
 
     protected CalendarHomePage calendarHomePage;
     protected NewEventPage newEventPage;
@@ -39,6 +40,7 @@ public class DriverSetup extends ConfigReader {
         }
 
         helpers = new Helpers();
+        restAssuredUtility = new RestAssuredUtility();
 
         calendarHomePage = new CalendarHomePage(driver);
         newEventPage = new NewEventPage(driver);
