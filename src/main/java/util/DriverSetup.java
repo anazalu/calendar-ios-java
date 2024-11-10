@@ -23,6 +23,9 @@ public class DriverSetup extends ConfigReader {
 
     protected CalendarHomePage calendarHomePage;
     protected NewEventPage newEventPage;
+    protected MonthPage monthPage;
+    protected CalendarsPage calendarsPage;
+    protected NewCalendarPage newCalendarPage;
 
     @BeforeMethod
     public void setUp() {
@@ -44,6 +47,9 @@ public class DriverSetup extends ConfigReader {
 
         calendarHomePage = new CalendarHomePage(driver);
         newEventPage = new NewEventPage(driver);
+        monthPage = new MonthPage(driver);
+        calendarsPage = new CalendarsPage(driver);
+        newCalendarPage = new NewCalendarPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

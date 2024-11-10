@@ -1,6 +1,7 @@
 package tests;
 
 import io.qameta.allure.*;
+import io.qameta.allure.internal.shadowed.jackson.annotation.JsonTypeInfo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,18 +22,40 @@ public class NewEventTest extends DriverSetup {
 
         calendarHomePage.tapToAddNewEvent();
         Assert.assertTrue(newEventPage.newEventPageLoaded(), "New event page is not loaded");
-//
+
+//  //    Code 429 for now - not able to use the service at this point
 //        GlobalVariables.response = restAssuredUtility.getActivityValue("activity");
 //        newEventPage.enterEventTitle(GlobalVariables.response);
 //        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), GlobalVariables.response.toLowerCase());
-        newEventPage.enterEventTitle("My title");
-        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), "My title".toLowerCase());
-//
-//
-//        newEventPage.chooseTravelTimeSpan("30 minutes");
-//
-////        calendarHomePage.chooseTimeslot("02:00");
-//
-//        newEventPage.chooseStartHour("20", "05");
+        newEventPage.enterEventTitle("My unique activity");
+        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), "My unique activity".toLowerCase());
+
+        newEventPage.tapOnStartsDateToExpand();
+
+//  //  Needs investigating - after changing month, date cannot be located
+//        newEventPage.tapOnNextMonthArrow();
+
+        newEventPage.chooseDate("24");
+
+        newEventPage.tapOnStartsTextToCollapse();
+
+        newEventPage.tapOnEndsDateToExpand();
+
+        newEventPage.chooseDate("25");
+
+        newEventPage.tapOnEndsTextToCollapse();
+
+
+//        newEventPage.chooseStartHour("11", "10");
+
+        newEventPage.chooseTravelTimeSpan("30 minutes");
+
+        newEventPage.switchToAllDay();
+        Assert.assertTrue(newEventPage.startDateWithoutTimeDisplayed(), "End time is still displayed");
+        Assert.assertTrue(newEventPage.endDateWithoutTimeDisplayed());
+
+        newEventPage.tapOnAddEventButton();
+        Assert.assertTrue(calendarHomePage.calendarHomePageLoaded(), "Calendar home page is not loaded");
+
     }
 }

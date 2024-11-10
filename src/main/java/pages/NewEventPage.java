@@ -33,6 +33,9 @@ public class NewEventPage {
 //    value = 0
 //    value = 1
 
+//    Starts (text) (if time picker won't work)
+//    Ends
+
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypePickerWheel)[1]")
     private RemoteWebElement hourPicker;
 
@@ -42,7 +45,13 @@ public class NewEventPage {
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name='Starts']/preceding-sibling::XCUIElementTypeButton/XCUIElementTypeButton)[2]")
     private RemoteWebElement startsHourPickerButton;
 
-//    Before choosing All-day
+    @iOSXCUITFindBy(accessibility = "Starts")
+    private RemoteWebElement startsText;
+
+    @iOSXCUITFindBy(accessibility = "Ends")
+    private RemoteWebElement endsText;
+
+    //    Before choosing All-day
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Date and Time Picker\"`][1]")
     private RemoteWebElement startDateAndTimePicker;
 
@@ -83,22 +92,66 @@ public class NewEventPage {
         return titleTextField.getText();
     }
 
-    @Step("Start hour {0} and minutes {1} is chosen")
-    public void chooseStartHour(String hour, String minutes) {
-        startsHourPickerButton.click();
-        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(hourPicker)).sendKeys(hour);
-        minutePicker.sendKeys(minutes);
+    public void tapOnStartsDateToExpand() {
+        startDateAndTimePicker.click();
     }
 
-    @Step("Time span {0} is chosen")
+    public void tapOnEndsDateToExpand() {
+        endDateAndTimePicker.click();
+    }
+
+//    Note this is a short-term solution, as it only works in November for choosing December
+//    The correct way would be to validate current month and then act accordingly - not enough time to implement now
+    public void tapOnNextMonthArrow() {
+        nextMonthButton.click();
+    }
+
+    @Step("Date {0} is chosen")
+    public void chooseDate(String dateChosen) {
+        WebElement element = driver.findElement(AppiumBy.accessibilityId(dateChosen));
+        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(element)).click();
+//        driver.findElement(AppiumBy.accessibilityId(dateChosen)).click();
+    }
+
+//    @Step("Start hour {0} and minutes {1} is chosen")
+//    public void chooseStartHour(String hour, String minutes) {
+//        startsHourPickerButton.click();
+//        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(hourPicker)).sendKeys(hour);
+//        minutePicker.sendKeys(minutes);
+//    }
+
+    public void tapOnStartsTextToCollapse() {
+        startsText.click();
+    }
+
+    public void tapOnEndsTextToCollapse() {
+        endsText.click();
+    }
+
+    @Step("Travel time of {0} is chosen")
     public void chooseTravelTimeSpan(String timeSpan) {
         travelTimePicker.click();
         driver.findElement(AppiumBy.accessibilityId(timeSpan)).click();
     }
 
-    @Step("Date {0} is chosen")
-    public void chooseDate(String dateChosen) {
-//        travelTimePicker.click();
-        driver.findElement(AppiumBy.accessibilityId(dateChosen)).click();
+    @Step("Make it an all-day event")
+    public void switchToAllDay() {
+        allDaySwitch.click();
     }
+
+    @Step("Only start date, but no time, is displayed")
+    public boolean startDateWithoutTimeDisplayed() {
+        return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(startDatePicker)).isDisplayed();
+    }
+
+    @Step("Only end date, but no time, is displayed")
+    public boolean endDateWithoutTimeDisplayed() {
+        return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(endDatePicker)).isDisplayed();
+    }
+
+    @Step("Add event")
+    public void tapOnAddEventButton() {
+        addEventButton.click();
+    }
+
 }
