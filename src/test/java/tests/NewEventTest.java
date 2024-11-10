@@ -23,10 +23,11 @@ public class NewEventTest extends DriverSetup {
         calendarHomePage.tapToAddNewEvent();
         Assert.assertTrue(newEventPage.newEventPageLoaded(), "New event page is not loaded");
 
-//  //    Code 429 for now - not able to use the service at this point
+//  //    Code 429 for now - not able to use REST API at this point
 //        GlobalVariables.response = restAssuredUtility.getActivityValue("activity");
 //        newEventPage.enterEventTitle(GlobalVariables.response);
 //        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), GlobalVariables.response.toLowerCase());
+//        Temporary solution:
         newEventPage.enterEventTitle("My unique activity");
         Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), "My unique activity".toLowerCase());
 
@@ -45,7 +46,7 @@ public class NewEventTest extends DriverSetup {
 
         newEventPage.tapOnEndsTextToCollapse();
 
-
+//        WIP - choose time
 //        newEventPage.chooseStartHour("11", "10");
 
         newEventPage.chooseTravelTimeSpan("30 minutes");
@@ -57,5 +58,10 @@ public class NewEventTest extends DriverSetup {
         newEventPage.tapOnAddEventButton();
         Assert.assertTrue(calendarHomePage.calendarHomePageLoaded(), "Calendar home page is not loaded");
 
+//    Temporary solution - should be December
+        calendarHomePage.tapOnMonth("Current month, November 2024");
+        Assert.assertTrue(monthPage.monthPageLoaded());
+
+        Assert.assertTrue(monthPage.eventAdded("Sunday, 24 November"), "Event not added");
     }
 }

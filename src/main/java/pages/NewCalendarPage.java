@@ -22,7 +22,7 @@ public class NewCalendarPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Add Calendar\"`]")
     private RemoteWebElement newCalendarContainer;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"done-button\"`][2]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"done-button\"`][1]")
     private RemoteWebElement doneButton;
 
     @iOSXCUITFindBy(accessibility = "calendar-title-field")

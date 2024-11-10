@@ -28,12 +28,6 @@ public class CalendarHomePage extends Helpers {
     @iOSXCUITFindBy(accessibility = "calendars-button")
     private RemoteWebElement calendarsButton;
 
-    @iOSXCUITFindBy(accessibility = "Current month, November 2024")
-    private RemoteWebElement monthNovemberView;
-
-    @iOSXCUITFindBy(accessibility = "December 2024")
-    private RemoteWebElement monthDecemberView;
-
     public CalendarHomePage(IOSDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
@@ -54,13 +48,6 @@ public class CalendarHomePage extends Helpers {
         calendarsButton.click();
     }
 
-//    Shortcut option
-    @Step("Open month view - November")
-    public void tapOnNovember() {
-        monthNovemberView.click();
-    }
-
-//    More accurate option
     @Step("Open {0} month view")
     public void tapOnMonth(String monthAccessibilityID) {
         driver.findElement(AppiumBy.accessibilityId(monthAccessibilityID)).click();

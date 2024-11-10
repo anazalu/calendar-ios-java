@@ -30,11 +30,6 @@ public class NewEventPage {
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeSwitch[@name=\"All-day\"]")
     private RemoteWebElement allDaySwitch;
-//    value = 0
-//    value = 1
-
-//    Starts (text) (if time picker won't work)
-//    Ends
 
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypePickerWheel)[1]")
     private RemoteWebElement hourPicker;
@@ -109,8 +104,9 @@ public class NewEventPage {
     @Step("Date {0} is chosen")
     public void chooseDate(String dateChosen) {
         WebElement element = driver.findElement(AppiumBy.accessibilityId(dateChosen));
+//        another locator for date:
+//        **/XCUIElementTypeStaticText[`name == "10"`]
         new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(element)).click();
-//        driver.findElement(AppiumBy.accessibilityId(dateChosen)).click();
     }
 
 //    @Step("Start hour {0} and minutes {1} is chosen")
@@ -153,5 +149,4 @@ public class NewEventPage {
     public void tapOnAddEventButton() {
         addEventButton.click();
     }
-
 }

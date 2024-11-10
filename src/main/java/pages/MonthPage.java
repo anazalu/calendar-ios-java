@@ -19,8 +19,8 @@ public class MonthPage {
 
     protected IOSDriver driver;
 
-    @iOSXCUITFindBy(accessibility = "monthXXX")
-    private RemoteWebElement monthXXX;
+    @iOSXCUITFindBy(accessibility = "MonthViewContainerView")
+    private RemoteWebElement monthViewContainer;
 
     public MonthPage(IOSDriver driver) {
         this.driver = driver;
@@ -29,14 +29,13 @@ public class MonthPage {
 
     @Step("Month page is loaded")
     public boolean monthPageLoaded() {
-        return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(monthXXX)).isDisplayed();
+        return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(monthViewContainer)).isDisplayed();
     }
 
-//    Temporary solution - should be December
-    @Step("Event is added")
-    public boolean eventAdded() {
-        WebElement element = driver.findElement(AppiumBy.accessibilityId("Sunday, 24 November"));
-
-        return !element.getAttribute("value").equalsIgnoreCase("no events");
+    @Step("Event on {0} date is added")
+    public boolean eventAdded(String eventDate) {
+        WebElement element = driver.findElement(AppiumBy.accessibilityId(eventDate));
+        System.out.println(element.getAttribute("value"));
+        return element.getAttribute("value").toLowerCase() != "no events";
     }
 }

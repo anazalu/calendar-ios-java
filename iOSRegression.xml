@@ -5,7 +5,7 @@
     <test verbose="2" name="iOS Regression">
         <classes>
             <class name="tests.NewEventTest"/>
-<!--            <class name="tests.NewCalendarTest"/>-->
+            <class name="tests.NewCalendarTest"/>
         </classes>
     </test>
 </suite>
