@@ -95,18 +95,13 @@ public class NewEventPage {
         endDateAndTimePicker.click();
     }
 
-//    Note this is a short-term solution, as it only works in November for choosing December
-//    The correct way would be to validate current month and then act accordingly - not enough time to implement now
     public void tapOnNextMonthArrow() {
         nextMonthButton.click();
     }
 
     @Step("Date {0} is chosen")
     public void chooseDate(String dateChosen) {
-        WebElement element = driver.findElement(AppiumBy.accessibilityId(dateChosen));
-//        another locator for date:
-//        **/XCUIElementTypeStaticText[`name == "10"`]
-        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(element)).click();
+        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId(dateChosen))).click();
     }
 
 //    @Step("Start hour {0} and minutes {1} is chosen")
@@ -127,7 +122,7 @@ public class NewEventPage {
     @Step("Travel time of {0} is chosen")
     public void chooseTravelTimeSpan(String timeSpan) {
         travelTimePicker.click();
-        driver.findElement(AppiumBy.accessibilityId(timeSpan)).click();
+        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId(timeSpan))).click();
     }
 
     @Step("Make it an all-day event")

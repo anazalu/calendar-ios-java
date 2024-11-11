@@ -49,9 +49,8 @@ public class NewCalendarPage {
     @Step("Color {0} is chosen")
     public void chooseColor(String colorChosen) {
         colorPickerButton.click();
-        WebElement element = driver.findElement(AppiumBy.accessibilityId(colorChosen));
-        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(element)).click();
-        driver.findElement(AppiumBy.accessibilityId("Add Calendar")).click();
+        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId(colorChosen))).click();
+        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Add Calendar"))).click();
     }
 
     @Step("Tap done")

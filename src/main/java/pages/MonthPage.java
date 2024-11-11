@@ -34,8 +34,9 @@ public class MonthPage {
 
     @Step("Event on {0} date is added")
     public boolean eventAdded(String eventDate) {
-        WebElement element = driver.findElement(AppiumBy.accessibilityId(eventDate));
+        WebElement element = new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId(eventDate)));
+
         System.out.println(element.getAttribute("value"));
-        return element.getAttribute("value").toLowerCase() != "no events";
+        return !element.getAttribute("value").equalsIgnoreCase("no events");
     }
 }

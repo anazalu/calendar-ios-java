@@ -24,17 +24,16 @@ public class NewEventTest extends DriverSetup {
         Assert.assertTrue(newEventPage.newEventPageLoaded(), "New event page is not loaded");
 
 //  //    Code 429 for now - not able to use REST API at this point
-        GlobalVariables.response = restAssuredUtility.getActivityValue("activity");
-        newEventPage.enterEventTitle(GlobalVariables.response);
-        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), GlobalVariables.response.toLowerCase());
+//        GlobalVariables.response = restAssuredUtility.getActivityValue("activity");
+//        newEventPage.enterEventTitle(GlobalVariables.response);
+//        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), GlobalVariables.response.toLowerCase());
 //        Temporary solution:
-//        newEventPage.enterEventTitle("My unique activity");
-//        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), "My unique activity".toLowerCase());
+        newEventPage.enterEventTitle("My unique activity");
+        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), "My unique activity".toLowerCase());
 
         newEventPage.tapOnStartsDateToExpand();
 
-//  //  Needs investigating - after changing month, date cannot be located
-//        newEventPage.tapOnNextMonthArrow();
+        newEventPage.tapOnNextMonthArrow();
 
         newEventPage.chooseDate("24");
 
@@ -58,10 +57,9 @@ public class NewEventTest extends DriverSetup {
         newEventPage.tapOnAddEventButton();
         Assert.assertTrue(calendarHomePage.calendarHomePageLoaded(), "Calendar home page is not loaded");
 
-//    Temporary solution - should be December
-        calendarHomePage.tapOnMonth("Current month, November 2024");
+        calendarHomePage.tapOnMonth("December 2024");
         Assert.assertTrue(monthPage.monthPageLoaded());
 
-        Assert.assertTrue(monthPage.eventAdded("Sunday, 24 November"), "Event not added");
+        Assert.assertTrue(monthPage.eventAdded("Tuesday, 24 December"), "Event not added");
     }
 }

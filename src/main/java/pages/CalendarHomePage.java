@@ -50,13 +50,6 @@ public class CalendarHomePage extends Helpers {
 
     @Step("Open {0} month view")
     public void tapOnMonth(String monthAccessibilityID) {
-        driver.findElement(AppiumBy.accessibilityId(monthAccessibilityID)).click();
+        new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId(monthAccessibilityID))).click();
     }
-
-//    @Step("Timeslot {0} is chosen")
-//    public void chooseTimeslot(String timeSlot) {
-//        WebElement element = driver.findElement(AppiumBy.accessibilityId(timeSlot));
-//        scrollTo(driver, element, Directions.DOWN, 5);
-//        longPress(driver, element);
-//    }
 }
