@@ -24,12 +24,12 @@ public class NewEventTest extends DriverSetup {
         Assert.assertTrue(newEventPage.newEventPageLoaded(), "New event page is not loaded");
 
 //  //    Code 429 for now - not able to use REST API at this point
-//        GlobalVariables.response = restAssuredUtility.getActivityValue("activity");
-//        newEventPage.enterEventTitle(GlobalVariables.response);
-//        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), GlobalVariables.response.toLowerCase());
+        GlobalVariables.response = restAssuredUtility.getActivityValue("activity");
+        newEventPage.enterEventTitle(GlobalVariables.response);
+        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), GlobalVariables.response.toLowerCase());
 //        Temporary solution:
-        newEventPage.enterEventTitle("My unique activity");
-        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), "My unique activity".toLowerCase());
+//        newEventPage.enterEventTitle("My unique activity");
+//        Assert.assertEquals(newEventPage.getEventTitleText().toLowerCase(), "My unique activity".toLowerCase());
 
         newEventPage.tapOnStartsDateToExpand();
 
